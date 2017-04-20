@@ -1,0 +1,146 @@
+// Mixins
+// --------------------------------------------------
+
+//多行文字截断
+@mixin line-clamp($lines) {
+    display: -webkit-box;
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    -webkit-line-clamp: $lines; //显示的行数
+    -webkit-box-orient: vertical;
+}
+
+
+//箭头>
+@mixin arrow($direciton:right,$borderWidth:1px,$color:#ddd,$size:8px) {
+    display: inline-block;
+
+    width: $size;
+    height: $size;
+
+    content: '';
+    vertical-align: middle;
+
+    border: $borderWidth solid $color;
+    border-top: none;
+    border-left: none;
+    @if $direciton == 'left' {
+        -webkit-transform: rotate(135deg);
+                transform: rotate(135deg);
+    } @else if $direciton == 'right' {
+        -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+    } @else if $direciton == 'top' {
+        -webkit-transform: rotate(-135deg);
+                transform: rotate(-135deg);
+    } @else if $direciton == 'bottom' {
+        -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
+    }
+}
+
+//渐变border
+@mixin gradient-border($r,$g,$b,$width: 1px,$postion:bottom) {
+    background-image: -webkit-linear-gradient(left, rgba($r,$g,$b,0), rgba($r,$g,$b,1), rgba($r,$g,$b,0));//采用rgba，兼容iOS
+    background-image:         linear-gradient(to right, rgba($r,$g,$b,0), rgba($r,$g,$b,1), rgba($r,$g,$b,0));
+    background-repeat: no-repeat;
+    background-size: 100% 1px;
+    @if $postion == 'top' {
+        background-position: 100% 0;
+    } @else if $postion == 'bottom' {
+        background-position: 0 100%;
+    }
+}
+
+//三角形
+@mixin triangle($direciton,$color,$width: 6px) {
+    font-size: 0;
+    line-height: 0;
+
+    display: inline-block;
+
+    width: 0;
+    height: 0;
+
+    vertical-align: -2px;
+
+    border: 0 dashed transparent;
+    border-width: $width;
+    @if $direciton == 'left' {
+        border-right-style: solid;
+        border-right-color: $color;
+    } @else if $direciton == 'right' {
+        border-left-style: solid;
+        border-left-color: $color;
+    } @else if $direciton == 'top' {
+        border-bottom-style: solid;
+        border-bottom-color: $color;
+    } @else if $direciton == 'bottom' {
+        border-top-style: solid;
+        border-top-color: $color;
+    } @else if $direciton == 'left-top' {
+        //◤左上角 
+        border-top-style: solid;
+        border-top-color: $color;
+        border-left-width: 0;
+    } @else if $direciton == 'left-bottom' {
+        //◣左下角
+        border-bottom-style: solid;
+        border-bottom-color: $color;
+        border-left-width: 0;
+    } @else if $direciton == 'right-top' {
+        //◥右上角
+        border-top-style: solid;
+        border-top-color: $color;
+        border-right-width: 0;
+    } @else if $direciton == 'right-bottom' {
+        border-right-width: 0;
+        //◢右下角
+        border-bottom-style: solid;
+        border-bottom-color: $color;
+    }
+}
+
+//根据dpr缩放border，解决retina屏幕1px border问题
+@mixin dpr-border($class, $color, $position:all, $radius:0) {
+    %border {
+        @if $position == 'all' {
+            border: 1px solid $color;
+        } @else if $position == 'right' {
+            border-right:  1px solid $color;
+        } @else if $position == 'left' {
+            border-left:  1px solid $color;
+        } @else if $position == 'top' {
+            border-top:  1px solid $color;
+        } @else if $position == 'bottom' {
+            border-bottom:  1px solid $color;
+        }
+    }
+    .#{$class} {
+        @extend %border;
+        border-radius: $radius;
+        position: relative;
+    }
+    $dpr: (2, 3);
+    @each $value in $dpr {
+        [data-dpr^='#{$value}'] .#{$class} {
+            border: none;
+            $rValue: 1/$value;
+            &:before{
+                content: ' ';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%*$value;
+                height: 100%*$value;
+                @extend %border;
+                border-radius: $radius;
+                -webkit-transform: scale($rValue) translate(-50% * ($value - 1),-50% * ($value - 1));
+                        transform: scale($rValue) translate(-50% * ($value - 1),-50% * ($value - 1));
+            }
+        }
+    }
+    
+}

@@ -1,0 +1,29 @@
+//
+// Buttons
+// --------------------------------------------------
+
+
+// Base styles
+// --------------------------------------------------
+
+.btn {
+    font-size: 18px;
+    line-height: pxToRem(84px);
+
+    display: inline-block;
+
+    width: 100%;
+    height: pxToRem(84px);
+
+    text-align: center;
+    white-space: nowrap;
+
+    color: #490308;
+    border-radius: 5px;
+    background: -webkit-linear-gradient(top, #ffe500, #ffb200);
+    background:         linear-gradient(top, #ffe500, #ffb200);
+}
+
+.btn:active {
+    background: #fc0;
+}

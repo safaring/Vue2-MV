@@ -1,0 +1,5 @@
+
+//px转rem 默认为iPhone6的设计稿(375px/10)
+@function pxToRem($px) {
+    @return $px/75px*1rem;
+}
