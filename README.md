@@ -1,13 +1,15 @@
 # Vue2-MV
 
-> 这是一个基于Vue2实现的网易云音乐MV的webapp。
-
-[在线地址](https://mv.mrcxh.com/)
+> 基于Vue2实现的网易云音乐MV的webapp。[在线地址](https://mv.mrcxh.com/)
 
 ### 主页功能
-- 查看搜索MV
+- 浏览MV列表
+- 搜索MV
 - 观看MV
-- 查看MV评论
+- 浏览MV评论
+
+### 技术栈
+vue2 + vue-router + webpack + ES6 + sass + rem + html5 video
 
 ## 截图
 ![首页/列表](http://wx3.sinaimg.cn/mw690/6457b6bfgy1fes9q77k5oj208w0fs3zt.jpg)
@@ -29,5 +31,5 @@ npm run build
 
 ## 鸣谢
 
-此网站提供的API: [https://api.imjad.cn/cloudmusic/](https://api.imjad.cn/cloudmusic/) ,此接口的说明请到这里[查看](https://api.imjad.cn/cloudmusic/index.html)
+提供API的网站: [https://api.imjad.cn/](https://api.imjad.cn/) ,此接口的说明[查看](https://api.imjad.cn/cloudmusic/index.html)
 
