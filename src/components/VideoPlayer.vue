@@ -1,13 +1,13 @@
 <template>
   <div class="videoplayer">
-    <div id="player" @touchend="showControls">
+    <div id="player" @click="showControls">
       <div class="controls" v-show="controlShow">
-        <a href="javascript:;" class="switch play" @click="play" v-show="!isPlay"></a>
-        <a href="javascript:;" class="switch pause" @click="play" v-show="isPlay && !loading"></a>
+        <a href="javascript:;" class="switch play" @click.stop="play" v-show="!isPlay"></a>
+        <a href="javascript:;" class="switch pause" @click.stop="play" v-show="isPlay && !loading"></a>
         <div class="v-loading">
           <loading :loading="loading" :theme="'light'" :size="'.45rem'"></loading>
         </div>
-        <a href="javascript:;" v-show="isPlayShow" class="full" @click="setFullScreen"></a>
+        <a href="javascript:;" v-show="isPlayShow" class="full" @click.stop="setFullScreen"></a>
         <div class="progress" ref="progress" v-show="isPlayShow">
           <span class="offset" :style="{width: videoProgress}"></span>
           <a href="javascript:;" ref="drager" :style="{left: videoProgress}" class="drager"></a>
@@ -105,6 +105,16 @@ export default {
         this.loading = true
       })
 
+      this.$video.addEventListener('pause',()=>{//当视频已暂停时
+        this.controlShow = true
+        this.isPlay = false
+      })
+
+      this.$video.addEventListener('play',()=>{//当视频已开始或不再暂停时
+        this.controlShow = false
+        this.isPlay = true
+      })
+
       this.$video.addEventListener('ended',()=>{//当目前的播放列表已结束时
         this.controlShow = true
         this.isPlay = false
@@ -166,15 +176,19 @@ export default {
     showControls() {
       clearTimeout(this.controlShowTimer)
       if(this.isPlay == true && !this.loading){
-        this.controlShow = true
-        this.controlShowTimer = setTimeout(() => {
+        if(this.controlShow == false){
+          this.controlShow = true
+          this.controlShowTimer = setTimeout(() => {
+            this.controlShow = false
+          },3000)
+        }else {
           this.controlShow = false
-        },3000)
+        }
       } 
     },
     setFullScreen() {
       if(this.$video.webkitEnterFullscreen != undefined){
-        this.$video.webkitEnterFullscreen();
+        this.$video.webkitEnterFullscreen()
       }
     }
   }
