@@ -1,6 +1,6 @@
 {
   "name": "Vue2-MV",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A Vue.js project",
   "author": "safaring",
   "private": true,
@@ -12,8 +12,7 @@
     "axios": "^0.15.3",
     "vue": "^2.1.0",
     "vue-infinite-scroll": "^2.0.0",
-    "vue-router": "^2.2.1",
-    "vuex": "^2.2.1"
+    "vue-router": "^2.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

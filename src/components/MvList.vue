@@ -32,14 +32,12 @@ export default {
     }
   },
   beforeMount(){
-    //this.fetchData()
-    var _this = this
-    this.$root.$on('change-skey', function (val) {
-      _this.sKey = val
-      console.log('---'+_this.sKey)
-      _this.mvList = []
-      _this.offset = 0
-      _this.fetchData()
+    this.$root.$on('change-skey', val => {
+      this.sKey = val
+      console.log('---'+this.sKey)
+      this.mvList = []
+      this.offset = 0
+      this.fetchData()
     })
 
     this.$root.$options.router.afterEach(route => {//通过router的变化，设置组件的infinite-scroll-disabled

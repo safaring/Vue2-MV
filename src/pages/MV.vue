@@ -38,14 +38,6 @@ export default {
   beforeMount() {
     this.fetchData()
   },
-  beforeRouteEnter(to, from, next){
-    next(vm => {
-      vm.$store.commit('changePoster',{
-        poster: to.params.poster
-      })
-      //console.log(vm.$store.state.poster);
-    })
-  },
   methods: {
     fetchData() {
       this.mvDetail = []

@@ -3,7 +3,6 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import store from './store'
 import * as filters from './util/filters'
 
 import axios from 'axios'
@@ -19,6 +18,5 @@ new Vue({
   el: '#app',
   template: '<App/>',
   components: { App },
-  router,
-  store
+  router
 })
