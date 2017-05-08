@@ -160,7 +160,9 @@ export default {
         }else if(event.targetTouches[0].clientX > this.$progress.offsetWidth){
           this.videoProgress = '100%'
         }else {
-          this.videoProgress = (event.targetTouches[0].clientX/this.$progress.offsetWidth).toFixed(4)*100 + '%'
+          var dragerTime = (event.targetTouches[0].clientX/this.$progress.offsetWidth).toFixed(4)
+          this.videoProgress = dragerTime*100 + '%'
+          this.currentTime = this.countMinutes(dragerTime*this.$video.duration)
         }
         
       })
